@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "JaksFlightSimulator",
+    "short_name": "JJaksFlightSimulator",
+    "description": "A basic flight simulator",
+    "start_url": "/",
+    "background_color": "#3c3c3c",
+    "theme_color": "#c0c0c0",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/Stephen_Baxter_Jak_E_Chronicle_Icon_256.png",
+            "sizes": "256x256"
+        }
+    ]
+}
