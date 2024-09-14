@@ -98,8 +98,8 @@ const math = {
         }
         Equal = function(vector_)
         {
-            console.log(this.vector === vector_)
-            return this.vector === vector_;
+            //console.log(this.vector === vector_)
+            return math.approximatelyEqual(this.vector[0], vector_[0]) && math.approximatelyEqual(this.vector[1], vector_[1]) && math.approximatelyEqual(this.vector[2], vector_[2])
         }
         Angle = function(vector_)
         {
@@ -179,6 +179,17 @@ const math = {
             m.matrix[1] = [y.vector[0],y.vector[1],y.vector[2],0];
             m.matrix[2] = [z.vector[0],z.vector[1],z.vector[2],0];
             this.matrix = m.matrix;
+        }
+        Copy = function()
+        {
+            let m = new math.MATRIX();
+            for (let i = 0; i < 4; i++)
+            {
+                for (let j = 0; j < 4; j++) {
+                    m.matrix[i][j] = this.matrix[i][j];
+                }
+            }
+            return m;
         }
     }
 }

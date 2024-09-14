@@ -83,7 +83,7 @@ class WORLD
             this.vertices.push(-this.size/2, 0, z, this.size/2, 0, z);
         }
 
-        this.windSpeedVector = new math.VECTOR(7, 0, 0, 0);//m/s
+        this.windSpeedVector = new math.VECTOR(70, 0, 70, 0);//m/s
         this.airDensity = 0.1
     }
 }
@@ -223,14 +223,61 @@ const OnUpdate = function(delta_time_)
     {
 
     }
+
+    /*let oldPlayerSpeedSquaredTest = player.oldSpeedVector.magnitudeSquared();
+    let oldPlayerSpeedUnitVectorTest = player.oldSpeedVector.Normalise();
+    if (oldPlayerSpeedSquaredTest === 0) oldPlayerSpeedUnitVectorTest = oldOrientationZUnitVector;
+
+    let windSpeedTest = world.windSpeedVector.magnitude();
+    let windSpeedSquaredTest = world.windSpeedVector.magnitudeSquared();
+    let WindSpeedUnitVectorTest = world.windSpeedVector.Normalise();
+
+    let windForceTest = 0.5 * world.airDensity * world.airDensity * windSpeedTest**2;
+    let windForceUnitVectorTest = WindSpeedUnitVectorTest;
+    let windForceVectorTest = windForceUnitVectorTest.MulNumber(windForceTest);
+
+    let relativeWindSpeedVectorTest = (world.windSpeedVector.SubVector(player.oldSpeedVector.vector));
+    let relativeWindSpeedTest = relativeWindSpeedVectorTest.magnitude()
+    let relativeWindSpeedUniteVectorTest = relativeWindSpeedVectorTest.Normalise()
+
+    let dragForceTest = 0.5 * 0.1 * world.airDensity * world.airDensity * relativeWindSpeedTest**2;
+    let dragForceUnitVectorTest = relativeWindSpeedUniteVectorTest;
+    let dragForceVectorTest = dragForceUnitVectorTest.MulNumber(dragForceTest);
+
+    let netAppliedForceVectorTest = windForceVectorTest;
+    let netResistiveForceVectorTest = dragForceVectorTest;
+
+    let netForceVectorX = (Math.sign(netAppliedForceVectorTest.vector[0]) != Math.sign(netAppliedForceVectorTest.vector[0]+netResistiveForceVectorTest.vector[0]) && Math.abs(player.oldSpeedVector.vector[0]) == 0) ? 0 : (netAppliedForceVectorTest.vector[0]+netResistiveForceVectorTest.vector[0]);
+    let netForceVectorY = (Math.sign(netAppliedForceVectorTest.vector[1]) != Math.sign(netAppliedForceVectorTest.vector[1]+netResistiveForceVectorTest.vector[1]) && Math.abs(player.oldSpeedVector.vector[1]) == 0) ? 0 : (netAppliedForceVectorTest.vector[1]+netResistiveForceVectorTest.vector[1]);
+    let netForceVectorZ = (Math.sign(netAppliedForceVectorTest.vector[2]) != Math.sign(netAppliedForceVectorTest.vector[2]+netResistiveForceVectorTest.vector[2]) && Math.abs(player.oldSpeedVector.vector[2]) == 0) ? 0 : (netAppliedForceVectorTest.vector[2]+netResistiveForceVectorTest.vector[2]);
+
+    let netForceVector = //new math.VECTOR(netForceVectorX, netForceVectorY, netForceVectorZ, 0);*/
+
+
+    //let netForceVector = windForceVectorTest.AddVector(dragForceVectorTest.vector);
+    //console.log(windForceVectorTest.vector, dragForceVectorTest.vector);
     
     //wind force = 1/2 * C * p * Area * SpeedSquared
     let windAlongPlayerXFrontVectorForce = Math.sign(windAlongPlayerXVectorSpeed) * 0.5 * world.airDensity * player.xCrossSectionArea.front * windAlongPlayerXVectorSpeed**2;
     let windAlongPlayerXBackVectorForce = Math.sign(windAlongPlayerXVectorSpeed) * 0.5 * world.airDensity * player.xCrossSectionArea.back * windAlongPlayerXVectorSpeed**2;
+    /*let windAlongPlayerXVectorDifferenceForce = Math.sign(windAlongPlayerXVectorSpeed) * Math.abs(windAlongPlayerXFrontVectorForce - windAlongPlayerXBackVectorForce)/2;
+    let windAlongPlayerXVectorAverageForce = (windAlongPlayerXFrontVectorForce + windAlongPlayerXBackVectorForce)/2;
+    let windAlongPlayerXVectorForceUnitVector = oldOrientationXUnitVector;
+    let windAlongPlayerXVectorForceVector = windAlongPlayerXVectorForceUnitVector.MulNumber(windAlongPlayerXVectorAverageForce);*/
+    
     let windAlongPlayerYFrontVectorForce = Math.sign(windAlongPlayerYVectorSpeed) * 0.5 * world.airDensity * player.yCrossSectionArea.front * windAlongPlayerYVectorSpeed**2;
     let windAlongPlayerYBackVectorForce = Math.sign(windAlongPlayerYVectorSpeed) * 0.5 * world.airDensity * player.yCrossSectionArea.back * windAlongPlayerYVectorSpeed**2;
+    /*let windAlongPlayerYVectorDifferenceForce = Math.sign(windAlongPlayerYVectorSpeed) * Math.abs(windAlongPlayerYFrontVectorForce - windAlongPlayerYBackVectorForce)/2;
+    let windAlongPlayerYVectorAverageForce = (windAlongPlayerYFrontVectorForce + windAlongPlayerYBackVectorForce)/2;
+    let windAlongPlayerYVectorForceUnitVector = oldOrientationYUnitVector;
+    let windAlongPlayerYVectorForceVector = windAlongPlayerYVectorForceUnitVector.MulNumber(windAlongPlayerYVectorAverageForce);*/
+    
     let windAlongPlayerZLeftVectorForce = Math.sign(windAlongPlayerZVectorSpeed) * 0.5 * world.airDensity * player.zCrossSectionArea.left * windAlongPlayerZVectorSpeed**2;
     let windAlongPlayerZRightVectorForce = Math.sign(windAlongPlayerZVectorSpeed) * 0.5 * world.airDensity * player.zCrossSectionArea.right * windAlongPlayerZVectorSpeed**2;
+    /*let windAlongPlayerZVectorDifferenceForce = Math.sign(windAlongPlayerZVectorSpeed) * Math.abs(windAlongPlayerZLeftVectorForce - windAlongPlayerZRightVectorForce)/2;
+    let windAlongPlayerZVectorAverageForce = (windAlongPlayerZLeftVectorForce + windAlongPlayerZRightVectorForce)/2;
+    let windAlongPlayerZVectorForceUnitVector = oldOrientationZUnitVector;
+    let windAlongPlayerZVectorForceVector = windAlongPlayerZVectorForceUnitVector.MulNumber(windAlongPlayerZVectorAverageForce);*/
     
     
     let appliedAlongPlayerXFrontVectorForce = windAlongPlayerXFrontVectorForce;
@@ -249,11 +296,26 @@ const OnUpdate = function(delta_time_)
     
     let dragAlongPlayerXFrontVectorForce = 0.5 * player.dragCoefficient.leftAndRight * world.airDensity * player.xCrossSectionArea.front * relativeWindAlongPlayerXVectorSpeed**2;
     let dragAlongPlayerXBackVectorForce = 0.5 * player.dragCoefficient.leftAndRight * world.airDensity * player.xCrossSectionArea.back * relativeWindAlongPlayerXVectorSpeed**2;
+    /*let dragAlongPlayerXVectorDifferenceForce = -1 * Math.sign(relativeWindAlongPlayerXVectorSpeed) * Math.abs(dragAlongPlayerXFrontVectorForce - dragAlongPlayerXBackVectorForce)/2;
+    let dragAlongPlayerXVectorAverageForce = (dragAlongPlayerXFrontVectorForce + dragAlongPlayerXBackVectorForce)/2;
+    let dragAlongPlayerXVectorForceUnitVector = oldOrientationXUnitVector.MulNumber(-1);
+    let dragAlongPlayerXVectorForceVector = dragAlongPlayerXVectorForceUnitVector.MulNumber(dragAlongPlayerXVectorAverageForce);*/
+    
     let dragAlongPlayerYFrontVectorForce = 0.5 * player.dragCoefficient.topAndBottom * world.airDensity * player.yCrossSectionArea.front * relativeWindAlongPlayerYVectorSpeed**2;
     let dragAlongPlayerYBackVectorForce = 0.5 * player.dragCoefficient.topAndBottom * world.airDensity * player.yCrossSectionArea.back * relativeWindAlongPlayerYVectorSpeed**2;
+    /*let dragAlongPlayerYVectorDifferenceForce = -1 * Math.sign(relativeWindAlongPlayerYVectorSpeed) * Math.abs(dragAlongPlayerYFrontVectorForce - dragAlongPlayerYBackVectorForce)/2;
+    let dragAlongPlayerYVectorAverageForce = (dragAlongPlayerYFrontVectorForce + dragAlongPlayerYBackVectorForce)/2;
+    let dragAlongPlayerYVectorForceUnitVector = oldOrientationYUnitVector.MulNumber(-1);
+    let dragAlongPlayerYVectorForceVector = dragAlongPlayerYVectorForceUnitVector.MulNumber(dragAlongPlayerYVectorAverageForce);*/
+    
     let playerDragCoefficientFrontAndBackForDragForce = (relativeWindAlongPlayerZVectorSpeed >= 0) ? player.dragCoefficient.front : player.dragCoefficient.back;
     let dragAlongPlayerZLeftVectorForce = 0.5 * playerDragCoefficientFrontAndBackForDragForce * world.airDensity * player.zCrossSectionArea.left * relativeWindAlongPlayerZVectorSpeed**2;
     let dragAlongPlayerZRightVectorForce = 0.5 * playerDragCoefficientFrontAndBackForDragForce * world.airDensity * player.zCrossSectionArea.right * relativeWindAlongPlayerZVectorSpeed**2;
+    /*let dragAlongPlayerZVectorDifferenceForce = -1 * Math.sign(relativeWindAlongPlayerZVectorSpeed) * Math.abs(dragAlongPlayerZLeftVectorForce - dragAlongPlayerZRightVectorForce)/2;
+    let dragAlongPlayerZVectorAverageForce = (dragAlongPlayerZLeftVectorForce + dragAlongPlayerZRightVectorForce)/2;
+    //let dragAlongPlayerZVectorForce = 0.5 * (((relativeWindAlongPlayerZVectorSpeed < 0) ? player.dragCoefficient.front : player.dragCoefficient.back) + 2 * inducedDragCoefficient) * world.airDensity * 5 * relativeWindAlongPlayerZVectorSpeed;
+    let dragAlongPlayerZVectorForceUnitVector = oldOrientationZUnitVector.MulNumber(-1);
+    let dragAlongPlayerZVectorForceVector = dragAlongPlayerZVectorForceUnitVector.MulNumber(dragAlongPlayerZVectorAverageForce);*/
 
     let resistiveAlongPlayerXFrontVectorForce = dragAlongPlayerXFrontVectorForce;
     let resistiveAlongPlayerXBackVectorForce = dragAlongPlayerXBackVectorForce;
@@ -276,8 +338,6 @@ const OnUpdate = function(delta_time_)
     player.oldVelocity.alongPlayerZLeftVector += 0.5 * netAlongPlayerZLeftVectorForce * delta_time_ / player.mass;
     player.oldVelocity.alongPlayerZRightVector += 0.5 * netAlongPlayerZRightVectorForce * delta_time_ / player.mass;
 
-    console.log(0.5 * netAlongPlayerXFrontVectorForce * delta_time_ / player.mass, 0.5 * netAlongPlayerXBackVectorForce * delta_time_ / player.mass);
-
     let netAlongPlayerXVectoVelocity = (player.oldVelocity.alongPlayerXFrontVector + player.oldVelocity.alongPlayerXBackVector);
     let netAlongPlayerYVectoVelocity = (player.oldVelocity.alongPlayerYFrontVector + player.oldVelocity.alongPlayerYBackVector);
     let netAlongPlayerZVectoVelocity = (player.oldVelocity.alongPlayerZLeftVector + player.oldVelocity.alongPlayerZRightVector);
@@ -287,14 +347,58 @@ const OnUpdate = function(delta_time_)
     let netAlongPlayerZVectoVelocityVector = oldOrientationZUnitVector.MulNumber(netAlongPlayerZVectoVelocity);
 
     player.oldVelocityVector = netAlongPlayerXVectoVelocityVector.AddVector(netAlongPlayerYVectoVelocityVector.vector).AddVector(netAlongPlayerZVectoVelocityVector.vector);
-    let playerYawAngularVelocity = (player.oldVelocity.alongPlayerXFrontVector -  player.oldVelocity.alongPlayerXBackVector) / (2 * player.distanceToStabilizers);
 
     //player.oldSpeedVector = player.oldSpeedVector.AddVector(newSpeedVector.vector)
     player.position = player.position.AddVector(player.oldVelocityVector.MulNumber(delta_time_).vector)
     //player.oldSpeedVector = player.oldSpeedVector.AddVector(newSpeedVector.vector)
-    //player.orientation = player.orientation.MulMatrix(math.MATRIX.CreateRotationMatrix(-1*playerYawAngularVelocity*delta_time_, player.orientation.matrix[1]).matrix);
 
-    //console.log(player.oldVelocityVector.vector, player.oldVelocity.alongPlayerXFrontVector, player.oldVelocity.alongPlayerXBackVector);//, netAlongPlayerXFrontVectorForce, relativeWindSpeed);
+    console.log(player.oldVelocityVector.magnitude(), netAlongPlayerXFrontVectorForce, relativeWindSpeed);
+    
+    /*let netAlongPlayerXVectorDifferenceForce = Math.sign(netAlongPlayerXFrontVectorForce) * Math.abs(netAlongPlayerXFrontVectorForce - netAlongPlayerXBackVectorForce)/2;
+    let netAlongPlayerXVectorAverageForce = (netAlongPlayerXFrontVectorForce + netAlongPlayerXBackVectorForce)/2;
+    let netAlongPlayerXVectorForceUnitVector = oldOrientationXUnitVector;
+    let netAlongPlayerXVectorForceVector = netAlongPlayerXVectorForceUnitVector.MulNumber(netAlongPlayerXVectorAverageForce);
+    let netAlongPlayerYVectorDifferenceForce = Math.sign(netAlongPlayerYFrontVectorForce) * Math.abs(netAlongPlayerYFrontVectorForce - netAlongPlayerYBackVectorForce)/2;
+    let netAlongPlayerYVectorAverageForce = (netAlongPlayerYFrontVectorForce + netAlongPlayerYBackVectorForce)/2;
+    let netAlongPlayerYVectorForceUnitVector = oldOrientationYUnitVector;
+    let netAlongPlayerYVectorForceVector = netAlongPlayerYVectorForceUnitVector.MulNumber(netAlongPlayerYVectorAverageForce);
+    let netAlongPlayerZVectorDifferenceForce = Math.sign(netAlongPlayerZLeftVectorForce) * Math.abs(netAlongPlayerZLeftVectorForce - netAlongPlayerZRightVectorForce)/2;
+    let netAlongPlayerZVectorAverageForce = (netAlongPlayerZLeftVectorForce + netAlongPlayerZRightVectorForce)/2;
+    let netAlongPlayerZVectorForceUnitVector = oldOrientationZUnitVector;
+    let netAlongPlayerZVectorForceVector = netAlongPlayerZVectorForceUnitVector.MulNumber(netAlongPlayerZVectorAverageForce);*/
+    //let dragForceVector = dragAlongPlayerXVectorForceVector.AddVector(dragAlongPlayerYVectorForceVector.vector).AddVector(dragAlongPlayerZVectorForceVector.vector);
+
+    //console.log(windForceVector.vector, dragForceVector.vector, player.oldSpeedVector.vector);
+
+    // v = v0 + a*t, a=F/m
+    //let netForceVector = netAlongPlayerXVectorForceVector.AddVector(netAlongPlayerYVectorForceVector.vector).AddVector(netAlongPlayerZVectorForceVector.vector);
+    /*let newSpeedVector = netForceVector.MulNumber(delta_time_/player.mass*0.5)
+    player.oldSpeedVector = player.oldSpeedVector.AddVector(newSpeedVector.vector)
+    player.position = player.position.AddVector(player.oldSpeedVector.MulNumber(delta_time_).vector)
+    player.oldSpeedVector = player.oldSpeedVector.AddVector(newSpeedVector.vector)*/
+
+    /*// v = v0 + a*t, a=T/I, T=F*d, I=0.5*m*d^2
+    let yawAngularForce = windAlongPlayerXVectorDifferenceForce + dragAlongPlayerXVectorDifferenceForce;
+    //let yawAngularVelocity = player.yRotationSpeed + (yawAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.yRotationSpeed += (yawAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.orientation = player.orientation.MulMatrix(math.MATRIX.CreateRotationMatrix(player.yRotationSpeed*delta_time_, player.orientation.matrix[1]).matrix);
+    player.yRotationSpeed += (yawAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+
+    let rollAngularForce = windAlongPlayerYVectorDifferenceForce + dragAlongPlayerYVectorDifferenceForce;
+    //let rollAngularVelocity = player.zRotationSpeed + (rollAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.zRotationSpeed += (rollAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.orientation = player.orientation.MulMatrix(math.MATRIX.CreateRotationMatrix(player.zRotationSpeed*delta_time_, player.orientation.matrix[2]).matrix);
+    player.zRotationSpeed += (rollAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+
+    let pitchAngularForce = windAlongPlayerZVectorDifferenceForce + dragAlongPlayerZVectorDifferenceForce;
+    //let pitchAngularVelocity = player.xRotationSpeed + (pitchAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.xRotationSpeed += (pitchAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;
+    player.orientation = player.orientation.MulMatrix(math.MATRIX.CreateRotationMatrix(player.xRotationSpeed*delta_time_, player.orientation.matrix[0]).matrix);
+    player.xRotationSpeed += (pitchAngularForce/(0.5 * player.mass * player.distanceToStabilizers))*delta_time_*0.5;*/
+
+    //player.oldRelativeWindSpeedVector = player.oldSpeedVector.MulNumber(-1).AddVector(world.windSpeedVector.vector);
+
+    //console.log(player.oldVelocityVector.magnitude(), player.yRotationSpeed);
 
     player.orientation.Orthonormalized();
     if (player.position.vector[1] < 1) player.position.vector[1] = 1;
